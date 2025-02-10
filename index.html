@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <body>
+    <div class="task-container">
+        <h1>JavaScript Task</h1>
+    
+        <!-- Problem 1: ATM Withdrawal System -->
+        <div class="task">
+          <h2>1. ATM Withdrawal System</h2>
+          <p>Check if withdrawal is allowed based on balance, amount, and PIN.</p>
+          <input type="number" id="atmBalance" placeholder="Enter Balance">
+          <input type="number" id="atmAmount" placeholder="Enter Amount">
+          <input type="number" id="atmPin" placeholder="Enter PIN">
+          <button class="task-button" onclick="runAtmWithdrawal()">Run ATM Withdrawal</button>
+          <p class="task-output" id="atmOutput"></p>
+        </div>
+    
+        <!-- Problem 2: Online Shopping Discount & Free Shipping -->
+        <div class="task">
+          <h2>2. Online Shopping Discount & Free Shipping</h2>
+          <p>Calculate the final amount after discount and shipping charges.</p>
+          <input type="number" id="orderAmount" placeholder="Enter Order Amount">
+          <button class="task-button" onclick="runCalculateFinalAmount()">Run Shopping Calculation</button>
+          <p class="task-output" id="shoppingOutput"></p>
+        </div>
+    
+        <!-- Problem 3: Student Grading System with Extra Credit -->
+        <div class="task">
+          <h2>3. Student Grading System with Extra Credit</h2>
+          <p>Calculate the student's final grade based on marks and attendance.</p>
+          <input type="number" id="marks" placeholder="Enter Marks">
+          <input type="number" id="attendance" placeholder="Enter Attendance (%)">
+          <button class="task-button" onclick="runCalculateGrade()">Run Grade Calculation</button>
+          <p class="task-output" id="gradeOutput"></p>
+        </div>
+    
+        <!-- Problem 4: Smart Traffic Light System -->
+        <div class="task">
+          <h2>4. Smart Traffic Light System</h2>
+          <p>Determine how long the green signal will stay based on traffic density.</p>
+          <select id="trafficDensity">
+            <option value="Heavy Traffic">Heavy Traffic</option>
+            <option value="Moderate Traffic">Moderate Traffic</option>
+            <option value="Light Traffic">Light Traffic</option>
+          </select>
+          <button class="task-button" onclick="runTrafficLightControl()">Run Traffic Light Control</button>
+          <p class="task-output" id="trafficOutput"></p>
+        </div>
+    
+        <!-- Problem 5: Movie Ticket Pricing with Time and Age Discount -->
+        <div class="task">
+          <h2>5. Movie Ticket Pricing with Time and Age Discount</h2>
+          <p>Calculate the final ticket price based on age and show time.</p>
+          <input type="number" id="age" placeholder="Enter Age">
+          <input type="number" id="showTime" placeholder="Enter Show Time (24-hour format)">
+          <button class="task-button" onclick="runCalculateTicketPrice()">Run Ticket Price Calculation</button>
+          <p class="task-output" id="ticketOutput"></p>
+        </div>
+    
+        <!-- Problem 6: Job Application Filter -->
+        <div class="task">
+          <h2>6. Job Application Filter</h2>
+          <p>Check if the applicant is eligible for the job.</p>
+          <input type="number" id="jobAge" placeholder="Enter Age">
+          <input type="number" id="experience" placeholder="Enter Experience (Years)">
+          <input type="text" id="qualification" placeholder="Enter Qualification">
+          <button class="task-button" onclick="runIsEligibleForJob()">Run Eligibility Check</button>
+          <p class="task-output" id="jobOutput"></p>
+        </div>
+    
+        <!-- Problem 7: E-commerce Coupon Redemption -->
+        <div class="task">
+          <h2>7. E-commerce Coupon Redemption</h2>
+          <p>Calculate the final price after applying coupons.</p>
+          <input type="number" id="couponOrderAmount" placeholder="Enter Order Amount">
+          <input type="text" id="couponCode" placeholder="Enter Coupon Code">
+          <button class="task-button" onclick="runApplyCoupon()">Run Coupon Application</button>
+          <p class="task-output" id="couponOutput"></p>
+        </div>
+    
+        <!-- Problem 8: Fitness Membership Plan -->
+        <div class="task">
+          <h2>8. Fitness Membership Plan</h2>
+          <p>Suggest the best membership plan based on preferences.</p>
+          <input type="checkbox" id="wantsTrainer"> Want Trainer?
+          <input type="checkbox" id="wantsDietPlan"> Want Diet Plan?
+          <button class="task-button" onclick="runChoosePlan()">Run Plan Suggestion</button>
+          <p class="task-output" id="planOutput"></p>
+        </div>
+    
+        <!-- Problem 9: Electricity Bill Calculation with Peak Hours -->
+        <div class="task">
+          <h2>9. Electricity Bill Calculation with Peak Hours</h2>
+          <p>Calculate the total electricity bill based on units and time of day.</p>
+          <input type="number" id="units" placeholder="Enter Units">
+          <select id="timeOfDay">
+            <option value="Normal">Normal Hours (8 AM - 8 PM)</option>
+            <option value="Peak">Peak Hours (8 PM - 8 AM)</option>
+          </select>
+          <button class="task-button" onclick="runCalculateElectricityBill()">Run Bill Calculation</button>
+          <p class="task-output" id="billOutput"></p>
+        </div>
+    
+        <!-- Problem 10: Flight Ticket Booking System -->
+        <div class="task">
+          <h2>10. Flight Ticket Booking System</h2>
+          <p>Calculate the final flight fare based on class, luggage, and discounts.</p>
+          <select id="classType">
+            <option value="Economy">Economy</option>
+            <option value="Business">Business</option>
+            <option value="First">First</option>
+          </select>
+          <input type="number" id="luggageWeight" placeholder="Enter Luggage Weight (kg)">
+          <input type="checkbox" id="isStudent"> Is Student?
+          <input type="checkbox" id="isSenior"> Is Senior?
+          <button class="task-button" onclick="runCalculateFlightFare()">Run Flight Fare Calculation</button>
+          <p class="task-output" id="flightOutput"></p>
+        </div>
+      </div>
+    
+      <footer>
+        <p>&copy; 2025 Done by Sharanya. All rights reserved.</p>
+      </footer>
+    
+</body>
+<script>
+  // Problem 1: ATM Withdrawal System
+function atmWithdrawal(balance, amount, pin, enteredPin) {
+if (enteredPin !== pin) return "Incorrect PIN";
+if (amount > balance) return "Insufficient Funds";
+if (amount % 100 !== 0) return "Enter amount in multiples of 100";
+return `Withdrawal successful. Remaining balance: $${balance - amount}`;
+}
+
+function runAtmWithdrawal() {
+const balance = parseFloat(document.getElementById("atmBalance").value);
+const amount = parseFloat(document.getElementById("atmAmount").value);
+const pin = 1234; // Example PIN
+const enteredPin = parseInt(document.getElementById("atmPin").value);
+const output = atmWithdrawal(balance, amount, pin, enteredPin);
+document.getElementById("atmOutput").textContent = output;
+}
+
+// Problem 2: Online Shopping Discount & Free Shipping
+function calculateFinalAmount(orderAmount) {
+let discount = 0;
+if (orderAmount > 1000) discount = 0.2;
+else if (orderAmount >= 500) discount = 0.1;
+
+let shipping = orderAmount > 50 ? 0 : 10;
+return `Final Amount: $${(orderAmount * (1 - discount) + shipping).toFixed(2)}`;
+}
+
+function runCalculateFinalAmount() {
+const orderAmount = parseFloat(document.getElementById("orderAmount").value);
+const output = calculateFinalAmount(orderAmount);
+document.getElementById("shoppingOutput").textContent = output;
+}
+
+// Problem 3: Student Grading System with Extra Credit
+function calculateGrade(marks, attendance) {
+if (attendance > 90) marks += 5;
+if (marks >= 90) return "A";
+if (marks >= 80) return "B";
+if (marks >= 70) return "C";
+if (marks >= 60) return "D";
+return "F";
+}
+
+function runCalculateGrade() {
+const marks = parseFloat(document.getElementById("marks").value);
+const attendance = parseFloat(document.getElementById("attendance").value);
+const output = calculateGrade(marks, attendance);
+document.getElementById("gradeOutput").textContent = `Final Grade: ${output}`;
+}
+
+// Problem 4: Smart Traffic Light System
+function trafficLightControl(density) {
+if (density === "Heavy Traffic") return "Green for 60 seconds";
+if (density === "Moderate Traffic") return "Green for 40 seconds";
+return "Green for 20 seconds";
+}
+
+function runTrafficLightControl() {
+const density = document.getElementById("trafficDensity").value;
+const output = trafficLightControl(density);
+document.getElementById("trafficOutput").textContent = output;
+}
+
+// Problem 5: Movie Ticket Pricing with Time and Age Discount
+function calculateTicketPrice(age, showTime) {
+let price = 12;
+if (showTime < 17) price *= 0.8; 
+if (age > 60) price *= 0.7; 
+if (age < 12) price *= 0.6;
+return `Final Ticket Price: $${price.toFixed(2)}`;
+}
+
+function runCalculateTicketPrice() {
+const age = parseFloat(document.getElementById("age").value);
+const showTime = parseFloat(document.getElementById("showTime").value);
+const output = calculateTicketPrice(age, showTime);
+document.getElementById("ticketOutput").textContent = output;
+}
+
+// Problem 6: Job Application Filter
+function isEligibleForJob(age, experience, qualification) {
+return age >= 21 && age <= 55 && experience >= 2 && qualification === "Bachelor's Degree";
+}
+
+function runIsEligibleForJob() {
+const age = parseFloat(document.getElementById("jobAge").value);
+const experience = parseFloat(document.getElementById("experience").value);
+const qualification = document.getElementById("qualification").value;
+const output = isEligibleForJob(age, experience, qualification);
+document.getElementById("jobOutput").textContent = output ? "Eligible" : "Not Eligible";
+}
+
+// Problem 7: E-commerce Coupon Redemption
+function applyCoupon(orderAmount, couponCode) {
+if (couponCode === "DISCOUNT10" && orderAmount > 500) {
+  return `Final Price: $${(orderAmount * 0.9).toFixed(2)}`;
+} else if (couponCode === "FREESHIP" && orderAmount > 200) {
+  return `Final Price: $${orderAmount.toFixed(2)}`;
+} else if (couponCode === "BOGO" && orderAmount >= 300) {
+  return `Buy One Get One applied. Final Price: $${orderAmount.toFixed(2)}`;
+}
+return `Invalid Coupon or Conditions Not Met. Final Price: $${orderAmount.toFixed(2)}`;
+}
+
+function runApplyCoupon() {
+const orderAmount = parseFloat(document.getElementById("couponOrderAmount").value);
+const couponCode = document.getElementById("couponCode").value;
+const output = applyCoupon(orderAmount, couponCode);
+document.getElementById("couponOutput").textContent = output;
+}
+
+// Problem 8: Fitness Membership Plan
+function chooseMembershipPlan(wantsTrainer, wantsDietPlan) {
+if (wantsTrainer && wantsDietPlan) {
+  return "Recommended Plan: Premium Plan with Trainer and Diet Plan";
+} else if (wantsTrainer) {
+  return "Recommended Plan: Trainer Included Plan";
+} else if (wantsDietPlan) {
+  return "Recommended Plan: Diet Plan Only";
+}
+return "Recommended Plan: Basic Membership";
+}
+
+function runChoosePlan() {
+const wantsTrainer = document.getElementById("wantsTrainer").checked;
+const wantsDietPlan = document.getElementById("wantsDietPlan").checked;
+const output = chooseMembershipPlan(wantsTrainer, wantsDietPlan);
+document.getElementById("planOutput").textContent = output;
+}
+
+// Problem 9: Electricity Bill Calculation
+function calculateElectricityBill(units, timeOfDay) {
+const rate = timeOfDay === "Peak" ? 10 : 5;
+return `Total Electricity Bill: $${(units * rate).toFixed(2)}`;
+}
+
+function runCalculateElectricityBill() {
+const units = parseFloat(document.getElementById("units").value);
+const timeOfDay = document.getElementById("timeOfDay").value;
+const output = calculateElectricityBill(units, timeOfDay);
+document.getElementById("billOutput").textContent = output;
+}
+
+// Problem 10: Flight Ticket Booking System
+function calculateFlightFare(classType, luggageWeight, isStudent, isSenior) {
+let baseFare;
+switch (classType) {
+  case "Economy":
+    baseFare = 100;
+    break;
+  case "Business":
+    baseFare = 200;
+    break;
+  case "First":
+    baseFare = 300;
+    break;
+  default:
+    baseFare = 0;
+}
+
+const luggageFee = luggageWeight > 20 ? (luggageWeight - 20) * 10 : 0;
+let discount = 0;
+if (isStudent) discount += 0.15;
+if (isSenior) discount += 0.10;
+
+const totalFare = baseFare + luggageFee;
+const discountedFare = totalFare * (1 - discount);
+
+return `Final Flight Fare: $${discountedFare.toFixed(2)}`;
+}
+
+function runCalculateFlightFare() {
+const classType = document.getElementById("classType").value;
+const luggageWeight = parseFloat(document.getElementById("luggageWeight").value);
+const isStudent = document.getElementById("isStudent").checked;
+const isSenior = document.getElementById("isSenior").checked;
+const output = calculateFlightFare(classType, luggageWeight, isStudent, isSenior);
+document.getElementById("flightOutput").textContent = output;
+}
+</script>
+</html>
